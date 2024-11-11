@@ -1,28 +1,48 @@
 package com.joseph.e_commerce_spring.model;
 
-import java.io.Serializable;
-import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-import java.util.Objects;
-
 
 /**
  * The persistent class for the user database table.
- * 
+ *
  */
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
-public class User  {
+//@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+public class User implements UserDetails  {
 	private static final long serialVersionUID = 1L;
+	private static final String AUTHORITIES_DELIMITER = "::";
 
 	@Id
 	private String iduser;
@@ -42,18 +62,66 @@ public class User  {
 
 	private String username;
 
-	//bi-directional many-to-one association to Userrole
-	@ManyToOne
-	@JoinColumn(name="roleid")
-	private Userrole userrole;
+	@Column(name = "enabled", nullable = false, columnDefinition = "TINYINT")
+	private boolean enabled;
+
+//	//bi-directional many-to-one association to Userrole
+//	@ManyToOne
+//	@JoinColumn(name="roleid")
+//	private Userrole userrole;
 //
 //	//bi-directional one-to-one association to Userinfo
 //	@OneToOne(mappedBy="user")
 //	private Userinfo userinfo;
 
+	//Join column is the main table
+	//inverse join column is the other table
+	@ManyToMany 
+	@JoinTable(
+			name = "userrole",
+			joinColumns = @JoinColumn(
+					name="user_iduser",
+					referencedColumnName = "iduser"
+					),
+			inverseJoinColumns = @JoinColumn(
+					name="role_id",
+					referencedColumnName = "id"
+					)
+			)
+	private Set<Role> roles = new HashSet<>();
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		List<SimpleGrantedAuthority> auths = roles.stream().map(
+				role ->new SimpleGrantedAuthority(role.getRole())).toList();
+		
+		
+		return auths;
+		
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return enabled;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(createdAt, iduser, lastogin, modifiedAt, password, username, userrole);
+		return Objects.hash(createdAt, enabled, iduser, lastogin, modifiedAt, password, roles, username);
 	}
 
 	@Override
@@ -65,10 +133,10 @@ public class User  {
 			return false;
 		}
 		User other = (User) obj;
-		return Objects.equals(createdAt, other.createdAt) && Objects.equals(iduser, other.iduser)
-				&& Objects.equals(lastogin, other.lastogin) && Objects.equals(modifiedAt, other.modifiedAt)
-				&& Objects.equals(password, other.password) && Objects.equals(username, other.username)
-				&& Objects.equals(userrole, other.userrole);
+		return Objects.equals(createdAt, other.createdAt) && enabled == other.enabled
+				&& Objects.equals(iduser, other.iduser) && Objects.equals(lastogin, other.lastogin)
+				&& Objects.equals(modifiedAt, other.modifiedAt) && Objects.equals(password, other.password)
+				&& Objects.equals(roles, other.roles) && Objects.equals(username, other.username);
 	}
 
 //	public User() {

@@ -1,18 +1,21 @@
 package com.joseph.e_commerce_spring.model;
 
-import jakarta.persistence.*;
+import java.util.Objects;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-import java.util.Objects;
-
 
 /**
  * The persistent class for the cart database table.
- * 
+ *
  */
 @Entity
 @Getter
@@ -48,10 +51,6 @@ public class Cart   {
 //	@OneToMany
 //	private List<Item> items;
 
-	public Cart() {
-	}
-
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(amount, idcart, item, userinfo);
@@ -70,7 +69,7 @@ public class Cart   {
 		return amount == other.amount && idcart == other.idcart && Objects.equals(item, other.item)
 				&& Objects.equals(userinfo, other.userinfo);
 	}
-	
+
 //
 //	public int getIdcart() {
 //		return this.idcart;

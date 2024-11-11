@@ -1,27 +1,28 @@
 package com.joseph.e_commerce_spring.model;
 
-import java.io.Serializable;
-import jakarta.persistence.*;
+import java.util.Objects;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-import java.util.Objects;
-
 
 /**
  * The persistent class for the merchant database table.
- * 
+ *
  */
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@NamedQuery(name="Merchant.findAll", query="SELECT m FROM Merchant m")
+//@NamedQuery(name="Merchant.findAll", query="SELECT m FROM Merchant m")
 public class Merchant  {
 	private static final long serialVersionUID = 1L;
 

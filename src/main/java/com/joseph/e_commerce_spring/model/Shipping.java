@@ -2,7 +2,9 @@ package com.joseph.e_commerce_spring.model;
 
 import java.util.Objects;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,14 +13,14 @@ import lombok.Setter;
 
 /**
  * The persistent class for the shipping database table.
- * 
+ *
  */
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@NamedQuery(name="Shipping.findAll", query="SELECT s FROM Shipping s")
+//@NamedQuery(name="Shipping.findAll", query="SELECT s FROM Shipping s")
 public class Shipping  {
 	private static final long serialVersionUID = 1L;
 

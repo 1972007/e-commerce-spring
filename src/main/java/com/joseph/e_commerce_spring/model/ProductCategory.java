@@ -1,11 +1,14 @@
 package com.joseph.e_commerce_spring.model;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-import jakarta.persistence.*;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,7 +16,7 @@ import lombok.Setter;
 
 /**
  * The persistent class for the product_category database table.
- * 
+ *
  */
 @Entity
 @Getter
@@ -21,7 +24,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="product_category")
-@NamedQuery(name="ProductCategory.findAll", query="SELECT p FROM ProductCategory p")
+//@NamedQuery(name="ProductCategory.findAll", query="SELECT p FROM ProductCategory p")
 public class ProductCategory  {
 	private static final long serialVersionUID = 1L;
 

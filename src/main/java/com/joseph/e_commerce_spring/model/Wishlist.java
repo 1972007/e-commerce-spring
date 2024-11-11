@@ -2,7 +2,11 @@ package com.joseph.e_commerce_spring.model;
 
 import java.util.Objects;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,14 +15,14 @@ import lombok.Setter;
 
 /**
  * The persistent class for the wishlist database table.
- * 
+ *
  */
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@NamedQuery(name="Wishlist.findAll", query="SELECT w FROM Wishlist w")
+//@NamedQuery(name="Wishlist.findAll", query="SELECT w FROM Wishlist w")
 public class Wishlist  {
 	private static final long serialVersionUID = 1L;
 
@@ -30,7 +34,7 @@ public class Wishlist  {
 	private Item item;
 
 	//bi-directional many-to-one association to Userinfo
-	
+
 	@ManyToOne
 	@JoinColumn(name="userInfo_userId", referencedColumnName="userId"	)
 	private Userinfo userinfo;

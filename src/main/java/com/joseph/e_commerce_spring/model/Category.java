@@ -3,8 +3,6 @@ package com.joseph.e_commerce_spring.model;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedQuery;
 import lombok.AllArgsConstructor;
@@ -22,7 +20,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
+//@NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
 public class Category  {
 	private static final long serialVersionUID = 1L;
 

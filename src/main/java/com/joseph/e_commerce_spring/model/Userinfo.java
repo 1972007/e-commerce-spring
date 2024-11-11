@@ -1,17 +1,24 @@
 package com.joseph.e_commerce_spring.model;
 
-import jakarta.persistence.*;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 
 /**
  * The persistent class for the userinfo database table.
- * 
+ *
  */
 @Entity
-@NamedQuery(name="Userinfo.findAll", query="SELECT u FROM Userinfo u")
+//@NamedQuery(name="Userinfo.findAll", query="SELECT u FROM Userinfo u")
 public class Userinfo  {
 	private static final long serialVersionUID = 1L;
 

@@ -2,9 +2,12 @@ package com.joseph.e_commerce_spring.model;
 
 import java.util.Objects;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,14 +15,14 @@ import lombok.Setter;
 
 /**
  * The persistent class for the order database table.
- * 
+ *
  */
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@NamedQuery(name="Order.findAll", query="SELECT o FROM Order o")
+//@NamedQuery(name="Order.findAll", query="SELECT o FROM Order o")
 public class Order  {
 	private static final long serialVersionUID = 1L;
 

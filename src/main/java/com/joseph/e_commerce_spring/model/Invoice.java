@@ -1,29 +1,33 @@
 package com.joseph.e_commerce_spring.model;
 
-import java.io.Serializable;
-import jakarta.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.Objects;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-
 
 /**
  * The persistent class for the invoice database table.
- * 
+ *
  */
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@NamedQuery(name="Invoice.findAll", query="SELECT i FROM Invoice i")
+//@NamedQuery(name="Invoice.findAll", query="SELECT i FROM Invoice i")
 public class Invoice  {
 	private static final long serialVersionUID = 1L;
 
